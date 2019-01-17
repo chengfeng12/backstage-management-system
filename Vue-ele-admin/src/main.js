@@ -15,6 +15,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 引入国际化语言包
 import i18n from './lang'
 
+// 引入图标库
+import './icons'
+
 // 引入权限控制器
 import './permission'
 // 引入mock数据

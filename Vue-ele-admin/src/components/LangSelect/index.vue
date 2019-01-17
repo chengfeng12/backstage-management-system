@@ -14,12 +14,12 @@
 <script>
 export default {
   computed: {
-    language() {
+    language () {
       return this.$store.getters.language
     }
   },
   methods: {
-    handleSetLanguage(lang) {
+    handleSetLanguage (lang) {
       // console.log(this.$i18n.locale)
       this.$i18n.locale = lang
       // 调用全局中的方法，进行设置语言
