@@ -15,7 +15,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 引入国际化语言包
 import i18n from './lang'
 
-// 引入图标库
+// 引入全局的svg的组件
 import './icons'
 
 // 引入权限控制器

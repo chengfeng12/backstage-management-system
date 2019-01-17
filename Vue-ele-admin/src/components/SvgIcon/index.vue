@@ -1,4 +1,5 @@
 <template>
+  <!-- 全局的组件 -->
   <svg :class="svgClass" aria-hidden="true">
     <use :xlink:href="iconName"/>
   </svg>
@@ -18,11 +19,13 @@ export default {
     }
   },
   computed: {
-    iconName() {
+    iconName () {
+      console.log(this.iconClass)
       return `#icon-${this.iconClass}`
     },
-    svgClass() {
+    svgClass () {
       if (this.className) {
+        console.log(this.className)
         return 'svg-icon ' + this.className
       } else {
         return 'svg-icon'
