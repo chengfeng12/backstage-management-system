@@ -20,12 +20,12 @@ export default {
   },
   computed: {
     iconName () {
-      console.log(this.iconClass)
+      // console.log(this.iconClass)
       return `#icon-${this.iconClass}`
     },
     svgClass () {
       if (this.className) {
-        console.log(this.className)
+        // console.log(this.className)
         return 'svg-icon ' + this.className
       } else {
         return 'svg-icon'

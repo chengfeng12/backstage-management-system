@@ -18,6 +18,10 @@ import i18n from './lang'
 // 引入全局的svg的组件
 import './icons'
 
+// 引入全局的样式
+import '@/styles/index.scss'
+import '@/styles/css/reset.css'
+
 // 引入权限控制器
 import './permission'
 // 引入mock数据
