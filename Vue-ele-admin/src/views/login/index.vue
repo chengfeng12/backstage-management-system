@@ -82,10 +82,20 @@ export default {
     },
     handleLogin () {
       // 这是表单验证成功之后的返回的布尔值
+      // console.log(this.$store.state.user.length)
       this.$refs.loginForm.validate(value => {
         if (value) {
+          // console.log(this.loginForm)
           this.loading = true
           // 调用全局的方法存储token然后进行路由跳转
+          this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
+            this.loading = false
+            this.$router.push({ path: this.redirect || '/' })
+            console.log('登陆成功')
+          }).catch(() => {
+            console.log('登录失败')
+            this.loading = false
+          })
         }
       })
     }
