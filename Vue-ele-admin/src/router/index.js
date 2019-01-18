@@ -40,6 +40,17 @@ export const constRouterMap = [
     path: '/401',
     component: () => import('@/views/errorPage/401'),
     hidden: true
+  },
+  {
+    path: '*',
+    component: () => import('@/views/layout/Layout'),
+    redirect: 'dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index')
+      }
+    ]
   }
 ]
 
