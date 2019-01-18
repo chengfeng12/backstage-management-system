@@ -1,12 +1,12 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" ref="loginForm" :model="loginForm" :rules="loginRules">
+    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
         <div class="title-container">
           <h3 class="title">{{ $t('login.title') }}</h3>
           <lang-select class="set-language"/>
         </div>
 
-        <el-form-item>
+        <el-form-item prop="username">
           <span class="svg-container">
             <svg-icon icon-class="user"/>
           </span>
@@ -37,19 +37,26 @@
 </template>
 
 <script>
-// import { validateAlphabets } from '@/utils/validate'
+import { isvalidUsername } from '@/utils/validate'
 import LangSelect from '@/components/LangSelect'
 export default {
   name: 'Login',
   data () {
     const validateUsername = (rule, value, callback) => {
-      console.log('wobeishuchule')
-      console.log(rule)
-      console.log(value)
-      console.log(callback)
+      // 在这里使用正则表单验证规则
+      if (!isvalidUsername(value)) {
+        // 可以调用一下cookie中的语言，进行判断输出
+        callback(new Error('Please enter the correct user name'))
+      } else {
+        callback()
+      }
     }
     const validatePassword = (rule, value, callback) => {
-
+      if (value.length < 6) {
+        callback(new Error('The password can not be less than 6 digits'))
+      } else {
+        callback()
+      }
     }
     return {
       loginForm: {
@@ -67,10 +74,20 @@ export default {
   components: { LangSelect },
   methods: {
     showPwd () {
-      console.log('woshiqiehuanyincang')
+      if (this.passwordType === 'password') {
+        this.passwordType = 'text'
+      } else {
+        this.passwordType = 'password'
+      }
     },
     handleLogin () {
-      console.log('woshidenglu')
+      // 这是表单验证成功之后的返回的布尔值
+      this.$refs.loginForm.validate(value => {
+        if (value) {
+          this.loading = true
+          // 调用全局的方法存储token然后进行路由跳转
+        }
+      })
     }
   }
 }
