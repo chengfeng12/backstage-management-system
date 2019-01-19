@@ -1,7 +1,7 @@
 // 定义i18n语言包
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-// import Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 // 引入elementUI中的三个语言包
 import elementEnLocal from 'element-ui/lib/locale/lang/en'
 import elementZhLocal from 'element-ui/lib/locale/lang/zh-CN'
@@ -31,9 +31,8 @@ const messages = {
 // console.log(Cookies.get('language') || 'zh')
 
 const i18n = new VueI18n({
-  locale: 'zh',
   // 现获取本地的语言，如果没有的话会取第二个值
-  // locale: Cookies.get('language') || 'zh',
+  locale: Cookies.get('language') || 'zh',
   messages
 })
 

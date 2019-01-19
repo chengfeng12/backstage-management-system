@@ -15,8 +15,8 @@
 export default {
   computed: {
     language () {
-      return 'zh'
-      // return this.$store.getters.language
+      console.log(this.$store.getters.language)
+      return this.$store.getters.language
     }
   },
   methods: {
@@ -25,7 +25,7 @@ export default {
       this.$i18n.locale = lang
       // 调用全局中的方法，进行设置语言
       // 因为是全局中引入的ElementUI所以不需要单独的引用Message了
-      // this.$store.dispatch('setLanguage', lang)
+      this.$store.dispatch('setLanguage', lang)
       // 设置的ElementUI中的提示信息
       this.$message({
         message: 'Switch Language Success',
