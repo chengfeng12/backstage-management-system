@@ -1,6 +1,6 @@
 import router from './router'
-// import store from './store'
-// import { Message } from 'element-ui'
+import store from './store'
+import { Message } from 'element-ui'
 import NProgress from 'nprogress' // 开始进度条
 import 'nprogress/nprogress.css'// 引入进度条样式
 import { getToken } from '@/utils/auth' // 获取token
@@ -20,8 +20,30 @@ router.beforeEach((to, from, next) => {
       // 如果当前页面是仪表板，则不会在每个钩子后触发，因此请手动处理它
       NProgress.done()
     } else {
-      next()
-      console.log('我是有token的单路由不是login')
+      // 在这里拉取用户的信息
+      if (store.getters.roles.length === 0) {
+        // 重新拉取用户信息
+        store.dispatch('GetUserInfo').then(res => {
+          const roles = res.data.roles
+          store.dispatch('GenerateRoutes', { roles }).then(() => { // 根据roles权限生成可访问的路由表
+            // 动态添加可访问路由表
+            router.addRoutes(store.getters.addRouters)
+            next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
+          })
+          console.log('拉取成功')
+        }).catch(err => {
+          store.dispatch('FedLogOut').then(() => {
+            Message.error(err || 'Verification failed, please login again')
+            next({ path: '/' })
+          })
+          console.log(store.getters.roles)
+          console.log('拉取失败')
+        })
+        next()
+      } else {
+        console.log('我是有用户信息的')
+        next()
+      }
     }
   } else {
     // /* has no token*/  不需要token值的页面，可以直接访问

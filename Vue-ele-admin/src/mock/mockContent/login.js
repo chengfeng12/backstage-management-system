@@ -1,5 +1,4 @@
-// import { param20bj } from '@/utils'
-
+import { param2Obj } from '@/utils'
 const userMap = {
   admin: {
     roles: ['admin'],
@@ -23,5 +22,18 @@ export default {
     // console.log(username)
     // 把用户户名返回
     return userMap[username]
+  },
+  getUserInfo: config => {
+    // 取出token
+    const { token } = param2Obj(config.url)
+    console.log('截取之后的token')
+    console.log(token)
+    // 如果有当前的这个用户的信息则返回
+    if (userMap[token]) {
+      return userMap[token]
+    } else {
+      // 没有的话直接返回false
+      return false
+    }
   }
 }

@@ -7,7 +7,7 @@ Vue.use(Router)
 // import Layout from '@/views/layout/Layout'
 
 // 路由映射
-export const constRouterMap = [
+export const constantRouterMap = [
   // 首页
   {
     path: '/',
@@ -53,8 +53,11 @@ export const constRouterMap = [
     ]
   }
 ]
+// 动态路由表
+export const asyncRouterMap = [
 
+]
 // 使用路由懒加载的方式
 export default new Router({
-  routes: constRouterMap
+  routes: constantRouterMap
 })

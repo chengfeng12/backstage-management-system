@@ -14,7 +14,6 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     console.log('我是请求拦截器')
-    console.log(store.getters.token)
     if (store.getters.token) {
       config.headers['X-Token'] = getToken()
     }
