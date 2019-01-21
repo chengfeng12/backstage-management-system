@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-Vue.use(Router)
-
 /* Layout  布局 */
-// import Layout from '@/views/layout/Layout'
+import Layout from '@/views/layout/Layout'
+
+Vue.use(Router)
 
 // 路由映射
 export const constantRouterMap = [
@@ -53,9 +53,20 @@ export const constantRouterMap = [
     ]
   }
 ]
+
 // 动态路由表
 export const asyncRouterMap = [
-
+  {
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission/index',
+    alwaysShow: true,
+    meta: {
+      title: 'permission',
+      icon: 'lock',
+      roles: ['admin', 'editor']
+    }
+  }
 ]
 // 使用路由懒加载的方式
 export default new Router({
